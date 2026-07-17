@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tower Defense Web</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar" aria-label="ゲーム状況">
+        <div>
+          <span class="label">Wave</span>
+          <strong id="wave">1</strong>
+        </div>
+        <div>
+          <span class="label">Life</span>
+          <strong id="life">20</strong>
+        </div>
+        <div>
+          <span class="label">Money</span>
+          <strong id="money">500G</strong>
+        </div>
+        <div>
+          <span class="label">Score</span>
+          <strong id="score">0</strong>
+        </div>
+        <div>
+          <span class="label">Combo</span>
+          <strong id="combo">0</strong>
+        </div>
+        <button id="settingsBtn" class="icon-button" type="button" title="設定" aria-label="設定">⚙</button>
+      </section>
+
+      <section class="game-layout">
+        <aside class="panel left-panel" aria-label="タワー一覧">
+          <h1>Tower Defense Web</h1>
+          <div class="select-row">
+            <label for="mapSelect">Map</label>
+            <select id="mapSelect"></select>
+          </div>
+          <div id="towerList" class="tower-list"></div>
+        </aside>
+
+        <section class="board-wrap" aria-label="ゲームボード">
+          <canvas id="gameCanvas" width="960" height="640"></canvas>
+          <div id="toast" class="toast" role="status" aria-live="polite"></div>
+          <div class="controls" aria-label="操作">
+            <button id="startBtn" class="primary-action" type="button">開始</button>
+            <button id="pauseBtn" type="button">一時停止</button>
+            <button id="speedBtn" type="button">倍速 x1</button>
+            <button id="saveBtn" type="button">手動保存</button>
+          </div>
+        </section>
+
+        <aside class="panel right-panel" aria-label="詳細">
+          <h2>選択中</h2>
+          <div id="selectionInfo" class="selection-info">タワーを選ぶか、配置済みタワーをクリックしてください。</div>
+          <div class="actions">
+            <button id="upgradeBtn" type="button" disabled>アップグレード</button>
+            <button id="sellBtn" type="button" disabled>売却</button>
+          </div>
+
+          <h2>戦況</h2>
+          <div id="battleStats" class="battle-stats"></div>
+
+          <h2>スキル</h2>
+          <div id="skillList" class="skill-list"></div>
+
+          <h2>実績</h2>
+          <div id="achievementList" class="achievement-list"></div>
+        </aside>
+      </section>
+
+      <section class="panel log-panel" aria-label="ログ">
+        <h2>Battle Log</h2>
+        <ol id="battleLog"></ol>
+      </section>
+    </main>
+
+    <dialog id="settingsDialog">
+      <form method="dialog" class="settings">
+        <h2>設定</h2>
+        <label>
+          音量
+          <input id="volumeRange" type="range" min="0" max="1" step="0.05" value="0.35">
+        </label>
+        <label>
+          画質
+          <select id="qualitySelect">
+            <option value="high">High</option>
+            <option value="medium">Medium</option>
+            <option value="low">Low</option>
+          </select>
+        </label>
+        <label>
+          FPS
+          <select id="fpsSelect">
+            <option value="60">60</option>
+            <option value="30">30</option>
+          </select>
+        </label>
+        <label class="check-row">
+          <input id="darkModeToggle" type="checkbox" checked>
+          ダークモード
+        </label>
+        <section class="danger-zone" aria-label="進捗リセット">
+          <strong>進捗リセット</strong>
+          <span>保存データ、Wave、資金、タワー、実績を初期状態に戻します。</span>
+          <button id="resetProgressBtn" type="button">進捗をリセット</button>
+        </section>
+        <menu>
+          <button value="cancel" type="submit">閉じる</button>
+        </menu>
+      </form>
+    </dialog>
+
+    <script src="data/game-data.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
